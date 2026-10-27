@@ -71,6 +71,7 @@ Quality gate:
 make lint
 make test
 make ci        # init-ci + lint + test + build-web
+make bot       # automated 5-phase playthrough
 ```
 
 Production preview:
@@ -102,7 +103,7 @@ output/app-debug.apk
 
 `.github/workflows/ci.yml` publishes two required checks:
 
-- **Quality Gate** — lint, 295 tests and production web build.
+- **Quality Gate** — lint, 295 tests, automated 5-phase bot and production web build.
 - **Android APK** — headless Gradle build uploaded as an artifact.
 
 Configure `main` branch protection as described in [.github/BRANCH_PROTECTION.md](.github/BRANCH_PROTECTION.md). While either check fails, GitHub blocks the merge.

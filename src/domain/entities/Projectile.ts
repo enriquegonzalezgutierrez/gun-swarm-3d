@@ -6,6 +6,7 @@ export class Projectile {
   public readonly id: string;
   public readonly velocity: Velocity3D;
   public readonly damage: Damage;
+  private readonly origin: Position3D;
   private currentPosition: Position3D;
   private penetrationsLeft: number;
   private active = true;
@@ -25,6 +26,7 @@ export class Projectile {
     }
     this.id = id;
     this.currentPosition = position;
+    this.origin = position;
     this.velocity = velocity;
     this.damage = damage;
     this.penetrationsLeft = penetrationCount;
@@ -40,6 +42,10 @@ export class Projectile {
 
   public get remainingPenetrations(): number {
     return this.penetrationsLeft;
+  }
+
+  public get travelledDistance(): number {
+    return this.currentPosition.distanceTo(this.origin);
   }
 
   public advance(deltaTime: number): Position3D {

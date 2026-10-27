@@ -107,7 +107,7 @@ export class PhaseContentView {
   private bossBox(boss: Boss): BoundingBox3D {
     return BoundingBox3D.fromCenterAndSize(
       boss.position.withY(2.5),
-      new Position3D(6, 5, 6),
+      new Position3D(10, 5, 6),
     );
   }
 

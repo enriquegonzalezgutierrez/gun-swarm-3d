@@ -10,7 +10,7 @@ DC := $(shell if docker compose version >/dev/null 2>&1; then echo "docker compo
 COMPOSE := $(DC) -f docker-compose.yml
 DEV_RUN := $(COMPOSE) run --rm --no-deps dev
 
-.PHONY: help init init-ci ci dev preview test test-watch lint build-web build-apk clean
+.PHONY: help init init-ci ci dev preview test test-watch bot lint build-web build-apk clean
 
 help: ## Display all available commands
 	@echo "GunSwarm 3D — Docker workflow"
@@ -43,6 +43,9 @@ test: ## Run the Vitest suite once inside Docker
 
 test-watch: ## Run Vitest in interactive watch mode
 	$(DEV_RUN) npm run test:watch
+
+bot: ## Run the automated bot across all five phases
+	$(DEV_RUN) env RUN_BOT=1 npx vitest run tests/integration/bot/AutoPlayBot.test.ts
 
 lint: ## Run strict type-checking and ESLint inside Docker
 	$(DEV_RUN) npm run lint

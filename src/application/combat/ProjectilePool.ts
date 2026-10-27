@@ -55,7 +55,7 @@ export class ProjectilePool {
       const position = projectile.advance(deltaTimeSeconds);
       this.render.updateEntityTransform(projectile.id, position);
       this.physics.updateColliderPosition(projectile.id, position);
-      if (position.z > PROJECTILE_MAX_DISTANCE) {
+      if (projectile.travelledDistance > PROJECTILE_MAX_DISTANCE) {
         this.remove(projectile.id);
         continue;
       }

@@ -34,7 +34,7 @@
       <rect width="230" height="84" rx="14" fill="#0d2a3a" stroke="#00e5ff"/>
       <text x="18" y="30" fill="#7fb7c6" font-size="10" letter-spacing="2">REQUIRED CHECK</text>
       <text x="18" y="54" fill="#e8f6ff" font-size="15" font-weight="700">Quality Gate</text>
-      <text x="18" y="72" fill="#90a4ae" font-size="10">lint · 295 tests · web build</text>
+      <text x="18" y="72" fill="#90a4ae" font-size="10">lint · tests · bot · web</text>
     </g>
     <g transform="translate(724 118)">
       <rect width="196" height="84" rx="14" fill="#140022" stroke="#d500f9" stroke-opacity=".6"/>

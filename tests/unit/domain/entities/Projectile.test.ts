@@ -29,7 +29,9 @@ describe('Projectile', () => {
     );
 
     expect(projectile.advance(0.5).equals(new Position3D(0, 0, 5))).toBe(true);
+    expect(projectile.travelledDistance).toBeCloseTo(5);
     expect(projectile.advance(0.5).equals(new Position3D(0, 0, 10))).toBe(true);
+    expect(projectile.travelledDistance).toBeCloseTo(10);
   });
 
   it('deactivates after a hit without penetration', () => {
