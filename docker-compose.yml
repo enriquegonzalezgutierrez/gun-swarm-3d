@@ -1,0 +1,56 @@
+name: gun-swarm-3d
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: .docker/dev.Dockerfile
+      args:
+        USER_UID: "${HOST_UID:-1000}"
+        USER_GID: "${HOST_GID:-1000}"
+    image: gun-swarm-3d-dev:latest
+    init: true
+    working_dir: /app
+    command: ["npm", "run", "dev"]
+    environment:
+      CHOKIDAR_USEPOLLING: "${CHOKIDAR_USEPOLLING:-0}"
+    ports:
+      - "${DEV_PORT:-5173}:5173"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    stdin_open: true
+    tty: true
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:5173').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  builder:
+    build:
+      context: .
+      dockerfile: .docker/builder.Dockerfile
+      args:
+        USER_UID: "${HOST_UID:-1000}"
+        USER_GID: "${HOST_GID:-1000}"
+    image: gun-swarm-3d-builder:latest
+    init: true
+    working_dir: /workspace
+    command: ["sleep", "infinity"]
+    environment:
+      HOME: /home/builder
+      GRADLE_USER_HOME: /home/builder/.gradle
+    volumes:
+      - .:/workspace
+      - node_modules:/workspace/node_modules
+      - gradle_cache:/home/builder/.gradle
+
+volumes:
+  node_modules:
+  gradle_cache:

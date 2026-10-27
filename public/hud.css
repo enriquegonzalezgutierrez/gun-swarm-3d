@@ -1,0 +1,74 @@
+#hud {
+  position: absolute;
+  inset: 0 0 auto;
+  padding: 12px;
+  color: #e8f6ff;
+  pointer-events: none;
+}
+
+.hud-row {
+  display: flex;
+  gap: 8px;
+}
+
+.stat {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 8px;
+  background: rgba(5, 10, 16, 0.72);
+  text-align: center;
+}
+
+.stat span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7fb7c6;
+}
+
+.stat strong {
+  font-size: 18px;
+  color: var(--cyan);
+}
+
+.progress,
+.boss-track {
+  height: 7px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.progress-fill {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #00b8d4, var(--cyan));
+  transition: width 0.15s linear;
+}
+
+.boss-bar {
+  margin-top: 10px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(26, 0, 44, 0.78);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.boss-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #d500f9, #ff1744);
+  transition: width 0.15s linear;
+}
+
+.shield {
+  margin-top: 8px;
+  color: #80d8ff;
+  font-size: 11px;
+  text-align: right;
+}
