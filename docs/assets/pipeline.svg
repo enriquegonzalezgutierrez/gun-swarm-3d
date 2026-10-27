@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="pipeTitle pipeDesc">
+  <title id="pipeTitle">GunSwarm 3D delivery pipeline</title>
+  <desc id="pipeDesc">Source, make ci, quality gate, Android APK and artifacts, with merge blocking until checks pass.</desc>
+  <defs>
+    <linearGradient id="pipeBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05070a"/>
+      <stop offset="1" stop-color="#0b1724"/>
+    </linearGradient>
+    <pattern id="pipeGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M30 0H0V30" fill="none" stroke="#00e5ff" stroke-opacity=".05" stroke-width="1"/>
+    </pattern>
+    <marker id="pipeArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#00e5ff"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="300" fill="url(#pipeBg)"/>
+  <rect width="1200" height="300" fill="url(#pipeGrid)"/>
+  <g font-family="Segoe UI, Inter, Arial, sans-serif">
+    <text x="42" y="48" fill="#7fb7c6" font-size="13" letter-spacing="4">DELIVERY PIPELINE</text>
+    <text x="42" y="78" fill="#e8f6ff" font-size="24" font-weight="700">Docker-only builds with a blocking quality gate</text>
+    <g transform="translate(42 118)">
+      <rect width="170" height="84" rx="14" fill="#0d1b28" stroke="#37474f"/>
+      <text x="18" y="30" fill="#7fb7c6" font-size="10" letter-spacing="2">SOURCE</text>
+      <text x="18" y="54" fill="#e8f6ff" font-size="15" font-weight="700">Push / PR</text>
+      <text x="18" y="72" fill="#90a4ae" font-size="10">GitHub main</text>
+    </g>
+    <g transform="translate(246 118)">
+      <rect width="180" height="84" rx="14" fill="#0d1b28" stroke="#00e5ff" stroke-opacity=".45"/>
+      <text x="18" y="30" fill="#7fb7c6" font-size="10" letter-spacing="2">ENTRY POINT</text>
+      <text x="18" y="54" fill="#00e5ff" font-size="15" font-weight="700">make ci</text>
+      <text x="18" y="72" fill="#90a4ae" font-size="10">inside Docker</text>
+    </g>
+    <g transform="translate(460 118)">
+      <rect width="230" height="84" rx="14" fill="#0d2a3a" stroke="#00e5ff"/>
+      <text x="18" y="30" fill="#7fb7c6" font-size="10" letter-spacing="2">REQUIRED CHECK</text>
+      <text x="18" y="54" fill="#e8f6ff" font-size="15" font-weight="700">Quality Gate</text>
+      <text x="18" y="72" fill="#90a4ae" font-size="10">lint · 295 tests · web build</text>
+    </g>
+    <g transform="translate(724 118)">
+      <rect width="196" height="84" rx="14" fill="#140022" stroke="#d500f9" stroke-opacity=".6"/>
+      <text x="18" y="30" fill="#c7a4e0" font-size="10" letter-spacing="2">ANDROID</text>
+      <text x="18" y="54" fill="#f6e9ff" font-size="15" font-weight="700">make build-apk</text>
+      <text x="18" y="72" fill="#c7a4e0" font-size="10">portrait · immersive</text>
+    </g>
+    <g transform="translate(954 118)">
+      <rect width="204" height="84" rx="14" fill="#0d1b28" stroke="#76ff03" stroke-opacity=".5"/>
+      <text x="18" y="30" fill="#9ccc8f" font-size="10" letter-spacing="2">ARTIFACTS</text>
+      <text x="18" y="54" fill="#eaffea" font-size="15" font-weight="700">dist/ + APK</text>
+      <text x="18" y="72" fill="#9ccc8f" font-size="10">web bundle · app-debug.apk</text>
+    </g>
+    <g stroke="#00e5ff" stroke-opacity=".65" stroke-width="2" marker-end="url(#pipeArrow)" fill="none">
+      <path d="M212 160 H242"/><path d="M426 160 H456"/><path d="M690 160 H720"/><path d="M920 160 H950"/>
+    </g>
+    <g transform="translate(460 226)">
+      <rect width="230" height="44" rx="12" fill="#d500f9" fill-opacity=".08" stroke="#d500f9" stroke-opacity=".35"/>
+      <text x="18" y="20" fill="#f6e9ff" font-size="11" font-weight="700">MERGE BLOCKED</text>
+      <text x="18" y="35" fill="#c7a4e0" font-size="10">until Quality Gate + Android APK pass</text>
+    </g>
+    <g transform="translate(724 226)">
+      <rect width="196" height="44" rx="12" fill="#00e5ff" fill-opacity=".06" stroke="#00e5ff" stroke-opacity=".25"/>
+      <text x="16" y="20" fill="#00e5ff" font-size="11" font-weight="700">HEADLESS SDK</text>
+      <text x="16" y="35" fill="#7fb7c6" font-size="10">OpenJDK 17 · Gradle 8.7</text>
+    </g>
+  </g>
+</svg>

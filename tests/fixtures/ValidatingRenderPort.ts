@@ -6,6 +6,7 @@ export interface CreatedMesh {
   readonly id: string;
   readonly type: string;
   readonly position: Position3D;
+  readonly label: string | undefined;
 }
 
 export class ValidatingRenderPort implements RenderPort {
@@ -23,9 +24,14 @@ export class ValidatingRenderPort implements RenderPort {
     this.renderedFrames += 1;
   }
 
-  public createEntityMesh(id: string, type: string, position: Position3D): void {
-    this.registry.create(type);
-    this.createdMeshes.push({ id, type, position });
+  public createEntityMesh(
+    id: string,
+    type: string,
+    position: Position3D,
+    label?: string,
+  ): void {
+    this.registry.create(type, label);
+    this.createdMeshes.push({ id, type, position, label });
   }
 
   public updateEntityTransform(

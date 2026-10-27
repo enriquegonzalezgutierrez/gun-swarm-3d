@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="biomesTitle biomesDesc">
+  <title id="biomesTitle">GunSwarm 3D five biomes</title>
+  <desc id="biomesDesc">Metropolis, Scorched Canyon, Toxic Foundry, Arctic Fortress and Cyber Void.</desc>
+  <defs>
+    <linearGradient id="b1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#07111e"/><stop offset="1" stop-color="#0b2a3d"/></linearGradient>
+    <linearGradient id="b2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a1208"/><stop offset="1" stop-color="#5a2912"/></linearGradient>
+    <linearGradient id="b3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#08140d"/><stop offset="1" stop-color="#143a1c"/></linearGradient>
+    <linearGradient id="b4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a1b28"/><stop offset="1" stop-color="#2f5364"/></linearGradient>
+    <linearGradient id="b5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#140022"/><stop offset="1" stop-color="#3a0b5c"/></linearGradient>
+  </defs>
+  <g font-family="Segoe UI, Inter, Arial, sans-serif">
+    <g transform="translate(20 30)">
+      <rect width="212" height="240" rx="18" fill="url(#b1)" stroke="#00e5ff" stroke-opacity=".35"/>
+      <circle cx="170" cy="42" r="18" fill="#00e5ff" fill-opacity=".18"/>
+      <g fill="#13293d"><rect x="18" y="60" width="28" height="70"/><rect x="54" y="42" width="34" height="88"/><rect x="96" y="70" width="24" height="60"/><rect x="128" y="50" width="38" height="80"/><rect x="174" y="78" width="20" height="52"/></g>
+      <g fill="#00e5ff" fill-opacity=".7"><rect x="22" y="70" width="5" height="5"/><rect x="36" y="88" width="5" height="5"/><rect x="62" y="56" width="5" height="5"/><rect x="76" y="80" width="5" height="5"/><rect x="138" y="64" width="5" height="5"/><rect x="154" y="92" width="5" height="5"/></g>
+      <path d="M0 130 H212" stroke="#00e5ff" stroke-opacity=".5" stroke-width="3"/>
+      <text x="18" y="172" fill="#e8f6ff" font-size="15" font-weight="700">METROPOLIS</text>
+      <text x="18" y="192" fill="#7fb7c6" font-size="9" letter-spacing="2">PHASE 01 · 220 M</text>
+      <text x="18" y="216" fill="#00e5ff" font-size="10">Neon highway · boss War Rig</text>
+    </g>
+    <g transform="translate(254 30)">
+      <rect width="212" height="240" rx="18" fill="url(#b2)" stroke="#ff5722" stroke-opacity=".4"/>
+      <circle cx="166" cy="46" r="22" fill="#ff5722" fill-opacity=".55"/>
+      <path d="M0 128 L38 86 L72 114 L112 72 L156 118 L212 94 V130 H0 Z" fill="#3d1c0c"/>
+      <path d="M0 130 L50 104 L94 126 L148 98 L212 122 V130 H0 Z" fill="#6d3416"/>
+      <rect x="44" y="112" width="4" height="18" fill="#9e6a4b"/><path d="M46 112 L66 104 L66 108 L48 116 Z" fill="#c47a4a"/>
+      <path d="M0 130 H212" stroke="#ff5722" stroke-opacity=".55" stroke-width="3"/>
+      <text x="18" y="172" fill="#fff3e0" font-size="15" font-weight="700">SCORCHED</text>
+      <text x="18" y="192" fill="#d7a07a" font-size="9" letter-spacing="2">CANYON · 250 M</text>
+      <text x="18" y="216" fill="#ff8a65" font-size="10">Pumpjacks · boss Dread Chopper</text>
+    </g>
+    <g transform="translate(488 30)">
+      <rect width="212" height="240" rx="18" fill="url(#b3)" stroke="#76ff03" stroke-opacity=".35"/>
+      <g fill="#2f4f3a"><path d="M32 124 V66 Q50 52 68 66 V124 Z"/><path d="M118 124 V58 Q138 44 158 58 V124 Z"/></g>
+      <g stroke="#76ff03" stroke-opacity=".6" stroke-width="2" fill="none"><path d="M50 66 V124"/><path d="M138 58 V124"/><path d="M0 82 H212"/><path d="M0 98 H212"/></g>
+      <g fill="#76ff03"><circle cx="52" cy="82" r="4"/><circle cx="106" cy="98" r="4"/><circle cx="170" cy="82" r="4"/></g>
+      <path d="M0 130 H212" stroke="#76ff03" stroke-opacity=".45" stroke-width="3"/>
+      <text x="18" y="172" fill="#eaffea" font-size="15" font-weight="700">TOXIC FOUNDRY</text>
+      <text x="18" y="192" fill="#9ccc8f" font-size="9" letter-spacing="2">PHASE 03 · 280 M</text>
+      <text x="18" y="216" fill="#76ff03" font-size="10">Pipes &amp; vats · boss Spider Mech</text>
+    </g>
+    <g transform="translate(722 30)">
+      <rect width="212" height="240" rx="18" fill="url(#b4)" stroke="#b0bec5" stroke-opacity=".5"/>
+      <path d="M0 124 L42 78 L76 112 L120 62 L164 108 L212 80 V130 H0 Z" fill="#dce9ef" fill-opacity=".22"/>
+      <path d="M0 130 L52 104 L102 126 L152 100 L212 120 V130 H0 Z" fill="#dce9ef" fill-opacity=".3"/>
+      <g fill="#16303d"><rect x="34" y="82" width="4" height="32"/><rect x="62" y="82" width="4" height="32"/><rect x="34" y="82" width="32" height="4"/><rect x="44" y="70" width="12" height="12"/></g>
+      <path d="M144 130 L158 92 L172 130 Z" fill="#9ccc8f"/><rect x="155" y="124" width="6" height="14" fill="#60503d"/>
+      <circle cx="176" cy="58" r="10" fill="#ffb300" fill-opacity=".8"/>
+      <text x="18" y="172" fill="#f0f8ff" font-size="15" font-weight="700">ARCTIC FORTRESS</text>
+      <text x="18" y="192" fill="#b0bec5" font-size="9" letter-spacing="2">PHASE 04 · 300 M</text>
+      <text x="18" y="216" fill="#ffb300" font-size="10">Watchtowers · boss Frost Behemoth</text>
+    </g>
+    <g transform="translate(956 30)">
+      <rect width="212" height="240" rx="18" fill="url(#b5)" stroke="#d500f9" stroke-opacity=".4"/>
+      <g fill="#d500f9" fill-opacity=".8"><circle cx="34" cy="40" r="2"/><circle cx="72" cy="28" r="1.6"/><circle cx="112" cy="46" r="2.2"/><circle cx="158" cy="30" r="1.5"/><circle cx="186" cy="58" r="2"/></g>
+      <g fill="none" stroke="#00e5ff" stroke-opacity=".65"><ellipse cx="106" cy="86" rx="46" ry="18"/><ellipse cx="106" cy="86" rx="30" ry="12"/></g>
+      <circle cx="106" cy="86" r="12" fill="#d500f9"/>
+      <path d="M96 128 L100 70 L112 70 L116 128 Z" fill="#311b92" stroke="#d500f9" stroke-opacity=".6"/>
+      <path d="M0 130 H212" stroke="#d500f9" stroke-opacity=".5" stroke-width="3"/>
+      <text x="18" y="172" fill="#f6e9ff" font-size="15" font-weight="700">CYBER VOID</text>
+      <text x="18" y="192" fill="#c7a4e0" font-size="9" letter-spacing="2">PHASE 05 · 350 M</text>
+      <text x="18" y="216" fill="#d500f9" font-size="10">Data rings · boss Dread Nexus</text>
+    </g>
+  </g>
+</svg>

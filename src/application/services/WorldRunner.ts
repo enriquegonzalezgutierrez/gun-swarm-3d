@@ -1,10 +1,13 @@
 import type { Damageable } from '../../domain/entities/Damageable';
+import { FormationEngine } from '../../domain/services/FormationEngine';
 import type { WorldRunnerOptions } from './WorldRunnerOptions';
 
 const FORWARD_SPEED = 14;
+const FORMATION_LERP = 0.25;
 
 export class WorldRunner {
   private readonly targets = new Map<string, Damageable>();
+  private readonly formation = new FormationEngine();
   private destroyedCount = 0;
 
   public constructor(private readonly options: WorldRunnerOptions) {
@@ -34,6 +37,7 @@ export class WorldRunner {
       const applied = stage.advance(FORWARD_SPEED * deltaTimeSeconds);
       squad.moveLeaderTo(squad.leaderPosition.withZ(squad.leaderPosition.z + applied));
     }
+    this.arrangeSquad();
     this.options.squadPresenter.sync(squad);
     render.updateCameraTarget(squad.leaderPosition);
     processCombat.execute(squad, this.targets, deltaTimeSeconds);
@@ -51,6 +55,26 @@ export class WorldRunner {
     this.options.processCombat.dispose();
     this.options.squadPresenter.dispose();
     this.options.contentView.dispose();
+  }
+
+  private arrangeSquad(): void {
+    const { squad, stage } = this.options;
+    const troopers = squad.activeTroopers;
+    if (troopers.length === 0) {
+      return;
+    }
+    const targets = this.formation.calculateWorldPositions(
+      squad.leaderPosition,
+      troopers.length,
+    );
+    troopers.forEach((trooper, index) => {
+      const target = targets[index];
+      if (target === undefined) {
+        return;
+      }
+      const clamped = target.withX(stage.clampLateral(target.x));
+      trooper.moveTo(trooper.position.lerp(clamped, FORMATION_LERP));
+    });
   }
 
   private cleanup(): void {

@@ -38,4 +38,16 @@ describe('ProcessCombatUseCase — firing behaviour', () => {
 
     expect(useCase.activeProjectileCount).toBe(0);
   });
+
+  it('keeps firing during a long run even when projectiles miss', () => {
+    const { useCase, render, squad, targets } = createCombatHarness();
+    render.createEntityMesh.mockClear();
+
+    for (let frame = 0; frame < 600; frame += 1) {
+      useCase.execute(squad, targets, 1 / 60);
+    }
+
+    expect(render.createEntityMesh.mock.calls.length).toBeGreaterThan(20);
+    expect(useCase.activeProjectileCount).toBeGreaterThan(0);
+  });
 });

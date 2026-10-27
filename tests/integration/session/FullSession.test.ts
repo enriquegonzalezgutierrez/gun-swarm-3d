@@ -70,6 +70,7 @@ describe('Full session integration', () => {
       }
 
       expect(session.state).toBe(SessionState.Running);
+      expect(session.squadSize).toBe(1);
       expect(session.leaderPosition.z).toBeGreaterThan(1);
       expect(session.leaderPosition.x).toBeLessThan(-0.5);
       expect(session.distanceTravelled).toBeGreaterThan(1);
@@ -80,6 +81,10 @@ describe('Full session integration', () => {
       expect(render.createdMeshes.some((mesh) => mesh.type === BOSS_TYPES[phaseNumber - 1])).toBe(
         true,
       );
+      const gateLabels = render.createdMeshes
+        .filter((mesh) => mesh.type.startsWith('MathGate'))
+        .map((mesh) => mesh.label);
+      expect(gateLabels).toEqual(expect.arrayContaining(['+10', 'x2', '-5', '÷2']));
       expect(view.updateHud).toHaveBeenCalled();
 
       session.dispose();

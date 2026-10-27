@@ -76,11 +76,12 @@ export class RunSessionFactory {
       config.startingWeaponTier,
     );
     const upgrade = save.upgrades.startingSquadSize;
-    const count = Math.max(
-      0,
+    const totalSquadSize = Math.max(
+      1,
       Math.round(upgrade.baseValue + upgrade.step * (upgrade.level - 1)),
     );
-    for (let index = 0; index < count; index += 1) {
+    const trooperCount = Math.max(0, totalSquadSize - 1);
+    for (let index = 0; index < trooperCount; index += 1) {
       const x = ((index % 3) - 1) * 0.8;
       const z = -0.6 - Math.floor(index / 3) * 0.7;
       squad.addTrooper(

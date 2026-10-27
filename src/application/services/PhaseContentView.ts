@@ -5,6 +5,7 @@ import { BoundingBox3D } from '../../domain/value-objects/BoundingBox3D';
 import { Position3D } from '../../domain/value-objects/Position3D';
 import type { PhysicsPort } from '../ports/driven/PhysicsPort';
 import type { RenderPort } from '../ports/driven/RenderPort';
+import { GateLabelFormatter } from './GateLabelFormatter';
 import type { PhaseContent } from './PhaseContent';
 
 const OBSTACLE_MESH_TYPES: Readonly<Record<ObstacleType, string>> = {
@@ -41,9 +42,10 @@ export class PhaseContentView {
         gate.position,
         BoundingBox3D.fromCenterAndSize(
           gate.position.withY(1.75),
-          new Position3D(2.2, 3.5, 0.3),
+          new Position3D(4.5, 3.5, 0.3),
         ),
         true,
+        GateLabelFormatter.format(gate),
       );
     }
     for (const [id, obstacle] of content.obstacles) {
@@ -95,8 +97,9 @@ export class PhaseContentView {
     position: Position3D,
     box: BoundingBox3D,
     isStatic: boolean,
+    label?: string,
   ): void {
-    this.render.createEntityMesh(id, type, position);
+    this.render.createEntityMesh(id, type, position, label);
     this.physics.registerCollider(id, box, isStatic);
     this.ids.add(id);
   }

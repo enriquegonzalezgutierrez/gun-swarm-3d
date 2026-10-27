@@ -1,147 +1,122 @@
+<p align="center">
+  <img src="docs/assets/gunswarm-banner.svg" alt="GunSwarm 3D — procedural crowd runner and auto-shooter" width="100%">
+</p>
+
+<p align="center">
+  <img src="docs/assets/badges.svg" alt="TypeScript, Docker, Three.js, Cannon-es, Capacitor, Vitest, tests, biomes and entities" width="100%">
+</p>
+
 # GunSwarm 3D
 
-GunSwarm 3D is a production-grade, 3D hyper-casual crowd-runner and auto-shooter game built for Web (Mobile/Desktop) and packaged natively as an Android APK. The project is engineered strictly following Domain-Driven Design (DDD), Hexagonal Architecture (Ports and Adapters), and the SOLID principles, enforcing a strict Anti-God-File policy.
+A production-grade 3D hyper-casual **crowd runner, auto-shooter and boss defense** game. It runs in a responsive 9:16 web viewport and ships as an Android APK through a fully Dockerized pipeline.
 
-The entire development and build lifecycle is 100% Dockerized and orchestrated via a `Makefile`. No local runtime dependencies (Node.js, Java, Android Studio, Gradle) are required on the host machine—only Docker and Make.
+The codebase follows **Domain-Driven Design**, **Hexagonal Architecture (Ports & Adapters)** and **SOLID**, with a hard Anti-God-File rule: every source file stays below 150 lines.
 
----
+## At a glance
 
-## 1. Project Specifications
+| Area | Implementation |
+| :--- | :--- |
+| **Gameplay** | Single leader, recruit-able swarm, continuous auto-fire, math gates, hazards, pickups and five bosses |
+| **Rendering** | Three.js · 27 procedural entity variants · zero external 3D models |
+| **Physics** | Cannon-es behind an isolated `PhysicsPort` adapter |
+| **Audio** | Web Audio API · 10 synthesized effects · zero audio files |
+| **Persistence** | LocalStorage meta-progression, currency and permanent upgrades |
+| **Platforms** | Responsive web + Capacitor Android APK (portrait, immersive) |
+| **Quality** | TypeScript strict, ESLint, Vitest, Docker-only builds and CI gates |
 
-* **Genre:** 3D Hyper-Casual Crowd Runner / Auto-Shooter / Swarm Defense.
-* **Target Platforms:**
-  * **Web Browsers:** Responsive portrait viewport (9:16 aspect ratio container with centered desktop presentation).
-  * **Android Mobile:** Native APK generated via Capacitor without requiring local Android Studio.
-* **Language & Runtime:** TypeScript (Strict Mode) on Node.js 20 (within Docker).
-* **Rendering Engine:** Three.js (Procedural geometries only; external `.gltf` / `.obj` assets are strictly prohibited).
-* **Physics Engine:** Cannon-es (Decoupled in an isolated infrastructure adapter).
-* **Audio Engine:** Web Audio API (100% procedural sound synthesis using oscillators and noise buffers; no external audio files).
-* **Persistence:** LocalStorage adapter for meta-progression, currency, and persistent player upgrades.
-* **Testing Framework:** Vitest (Executing headless domain and integration tests inside Docker).
+## Architecture
 
----
+<p align="center">
+  <img src="docs/assets/architecture.svg" alt="DDD and hexagonal architecture diagram" width="100%">
+</p>
 
-## 2. Architectural Principles
+The **domain core is pure TypeScript** and imports nothing from Three.js, Cannon-es, Capacitor or the DOM. Use cases depend on ports; infrastructure adapters implement them and are wired at the composition root in `src/main.ts`.
 
-1. **Domain-Driven Design (DDD):**
-   * The core business domain (swarm coordinates, recruitment math, projectile collision calculations, combat stats, health, and wave progression) is pure TypeScript.
-   * The domain layer contains zero imports from Three.js, Cannon-es, Capacitor, or browser DOM APIs.
+Detailed contracts and boundaries: [ARCHITECTURE.md](ARCHITECTURE.md).
 
-2. **Hexagonal Architecture (Ports & Adapters):**
-   * **Domain Core:** Pure entities, value objects, domain events, and aggregates.
-   * **Application Layer:** Driving ports (Use Cases) orchestrating domain operations.
-   * **Driven Ports (Interfaces):** `RenderPort`, `PhysicsPort`, `AudioPort`, `StoragePort`, and `InputPort`.
-   * **Infrastructure Adapters:** `ThreeJsRenderAdapter`, `CannonPhysicsAdapter`, `WebAudioAdapter`, `LocalStorageAdapter`, and `BrowserInputAdapter`.
+## Gameplay and controls
 
-3. **Strict Anti-God-File Policy:**
-   * No single file may exceed **150 lines of code**.
-   * One class, interface, or responsibility per file.
-   * Monolithic game managers or all-in-one update loops are strictly forbidden. All logic is decomposed into single-responsibility services and handlers.
+- One controllable **Squad Leader**; recruited troopers follow in a Fermat-spiral formation.
+- **Automatic fire** at the weapon's cadence — no manual shoot button.
+- Choose a lane at every math gate. Each gate clearly shows its effect: `+10`, `x2`, `-5`, `÷2`.
+- Collect coins, weapon chests and shield orbs; destroy obstacles and defeat the phase boss.
+- Reach the boss arena, survive its approach and burn it down.
 
-4. **Procedural Aesthetics:**
-   * All 27 game entities (troopers, enemies, hazards, gates, bosses) are generated programmatically by assembling Three.js primitives (`BoxGeometry`, `CylinderGeometry`, `SphereGeometry`, `CapsuleGeometry`).
-   * 5 distinct environmental biomes with dynamic procedural scenery to eliminate visual fatigue.
+| Action | Touch | Desktop |
+| :--- | :--- | :--- |
+| Move laterally | Drag on the game canvas | `A` / `D` or `←` / `→` |
+| Start / retry | On-screen buttons | On-screen buttons |
+| Meta upgrades | Defeat screen → **Upgrades** | Defeat screen → **Upgrades** |
 
----
+## Five procedural biomes
 
-## 3. Directory Layout Blueprint
+<p align="center">
+  <img src="docs/assets/biomes.svg" alt="Metropolis, Scorched Canyon, Toxic Foundry, Arctic Fortress and Cyber Void" width="100%">
+</p>
 
-```text
-gun-swarm-3d/
-├── .docker/
-│   ├── dev.Dockerfile              # Development runtime (Node + Vite)
-│   └── builder.Dockerfile          # Android SDK + Gradle headless build runtime
-├── docker-compose.yml              # Container orchestration
-├── Makefile                        # Single entry point for all workflows
-├── README.md                       # Project overview and quickstart (This file)
-├── GDD.md                          # Comprehensive Game Design Document
-├── ARCHITECTURE.md                 # Detailed DDD, Hexagonal, and SOLID design rules
-├── AGENT_RULES.md                  # Operating instructions and constraints for OpenCode / LLMs
-├── PROGRESS.md                     # Atomic task tracker for autonomous implementation
-├── public/                         # Static web assets (index.html, manifest)
-├── src/
-│   ├── domain/                     # Pure enterprise logic (Entities, Value Objects, Events)
-│   ├── application/                # Use cases and port contracts
-│   ├── infrastructure/             # Concrete adapters (Three.js, Cannon-es, Audio, Storage)
-│   └── main.ts                     # Composition root / Dependency injection bootstrapper
-└── tests/                          # Vitest automated test suite (Unit & Integration)
+Each phase changes fog, lighting, side scenery, track length and boss: **War Rig**, **Dread Chopper**, **Spider Mech**, **Frost Behemoth** and **Dread Nexus**.
+
+## Quick start
+
+Requirements: Docker Engine 24+, Docker Compose 2.20+ and GNU Make 4.3+.
+
+```bash
+make init      # build images and install dependencies
+make dev       # Vite HMR at http://localhost:5173
 ```
 
----
+Quality gate:
 
-## 4. Makefile Command Reference
+```bash
+make lint
+make test
+make ci        # init-ci + lint + test + build-web
+```
 
-The project uses a self-documenting `Makefile`. Running `make` or `make help` displays the available targets:
+Production preview:
 
-| Command | Description |
+```bash
+make build-web
+make preview    # http://localhost:4173
+```
+
+## Android APK
+
+Capacitor is configured in `capacitor.config.ts`. The committed `android/` project enforces **portrait orientation** and **immersive fullscreen** mode.
+
+```bash
+make build-apk
+```
+
+Output:
+
+```text
+output/app-debug.apk
+```
+
+## CI and merge protection
+
+<p align="center">
+  <img src="docs/assets/pipeline.svg" alt="CI pipeline: quality gate and Android APK" width="100%">
+</p>
+
+`.github/workflows/ci.yml` publishes two required checks:
+
+- **Quality Gate** — lint, 295 tests and production web build.
+- **Android APK** — headless Gradle build uploaded as an artifact.
+
+Configure `main` branch protection as described in [.github/BRANCH_PROTECTION.md](.github/BRANCH_PROTECTION.md). While either check fails, GitHub blocks the merge.
+
+## Documentation
+
+| Document | Contents |
 | :--- | :--- |
-| `make help` | Displays all available commands with descriptions (Default target). |
-| `make init` | Pulls images, sets up volumes, and initializes the project skeleton inside Docker. |
-| `make init-ci` | Builds only the dev image and installs locked dependencies for CI. |
-| `make ci` | Runs lint, tests, and the web build inside Docker (CI quality gate). |
-| `make dev` | Starts the local Vite development server with Hot Module Replacement (HMR) at `http://localhost:5173`. |
-| `make preview` | Serves the production `dist/` bundle at `http://localhost:4173`. |
-| `make test` | Runs the full Vitest suite headlessly inside the Docker development container. |
-| `make test-watch` | Runs Vitest in interactive watch mode for rapid test-driven development. |
-| `make lint` | Executes TypeScript type-checking (`tsc --noEmit`) and ESLint validations. |
-| `make build-web` | Compiles and bundles production-ready HTML/CSS/JS artifacts into the `dist/` directory. |
-| `make build-apk` | Triggers the headless Android build container, runs Gradle via CLI, and outputs `app-debug.apk` to `./output/`. |
-| `make clean` | Stops all containers, removes network bridges, and purges temporary build artifacts. |
+| [GDD.md](GDD.md) | Full game design, math, biomes, entities, combat and progression |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | DDD, Hexagonal boundaries, ports and directory contracts |
+| [AGENT_RULES.md](AGENT_RULES.md) | Autonomous engineering rules and anti-god-file policy |
+| [PROGRESS.md](PROGRESS.md) | Atomic implementation tracker (all phases complete) |
+| [.github/BRANCH_PROTECTION.md](.github/BRANCH_PROTECTION.md) | Required checks and merge-blocking setup |
 
 ---
 
-## 5. Development Workflow
-
-1. **Host Prerequisites:**
-   * Docker Engine `>= 24.0`
-   * Docker Compose `>= 2.20`
-   * GNU Make `>= 4.3`
-
-2. **Starting the Dev Environment:**
-   ```bash
-   make init
-   make dev
-   ```
-   Open `http://localhost:5173` on your host machine browser. Any changes to `src/` will reflect immediately via Hot Module Replacement.
-
-3. **Running Quality Checks:**
-   ```bash
-   make test
-   make lint
-   ```
-
-4. **Generating the Android APK:**
-   ```bash
-   make build-apk
-   ```
-   The compiled APK binary will be placed at:
-   `./output/app-debug.apk`
-
----
-
-## 6. Language & Code Standards
-
-* **100% English Codebase:** All code, variables, function signatures, interfaces, classes, filenames, tests, error messages, and inline documentation must be written in idiomatic English.
-* **Zero Host Contamination:** Never run `npm install`, `npx`, or `gradle` directly on your host operating system. All execution happens within the verified Docker containers via the `Makefile`.
-
----
-
-## 7. CI Pipeline
-
-* `make ci` runs the complete quality gate inside Docker: `init-ci`, `lint`, `test`, and `build-web`.
-* `.github/workflows/ci.yml` exposes the required check **Quality Gate** on pull requests and pushes to `main`.
-* Branch protection instructions are documented in `.github/BRANCH_PROTECTION.md`. Once enabled, GitHub blocks merges while the check is failing.
-* `.github/workflows/android-apk.yml` builds and uploads the debug APK on manual dispatch and `v*` tags.
-
-## 8. Android Packaging
-
-* Capacitor is configured in `capacitor.config.ts` with app id `com.gunswarm.game`.
-* The committed `android/` project enforces portrait orientation and immersive fullscreen mode.
-* Build the debug APK with:
-
-  ```bash
-  make build-apk
-  ```
-
-* The artifact is written to `./output/app-debug.apk`.
-
+**Stack:** TypeScript · Three.js · Cannon-es · Web Audio · Capacitor · Vite · Vitest · Docker · GitHub Actions

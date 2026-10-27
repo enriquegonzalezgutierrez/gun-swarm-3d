@@ -25,6 +25,10 @@ export class GameSession implements GameSystem {
     return this.options.stage.distanceTravelled;
   }
 
+  public get squadSize(): number {
+    return this.options.squad.totalSize;
+  }
+
   public start(): void {
     if (this.stateValue !== SessionState.Idle) {
       return;

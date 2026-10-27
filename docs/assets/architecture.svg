@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="archTitle archDesc">
+  <title id="archTitle">GunSwarm 3D hexagonal architecture</title>
+  <desc id="archDesc">Domain core inside application ports inside infrastructure adapters, with dependencies pointing inward.</desc>
+  <defs>
+    <linearGradient id="archBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05070a"/>
+      <stop offset="1" stop-color="#0b1724"/>
+    </linearGradient>
+    <linearGradient id="archDomain" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a002c"/>
+      <stop offset="1" stop-color="#081018"/>
+    </linearGradient>
+    <linearGradient id="archApp" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d2a3a"/>
+      <stop offset="1" stop-color="#07131f"/>
+    </linearGradient>
+    <pattern id="archGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#00e5ff" stroke-opacity=".05" stroke-width="1"/>
+    </pattern>
+    <marker id="archArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#00e5ff"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="560" fill="url(#archBg)"/>
+  <rect width="1000" height="560" fill="url(#archGrid)"/>
+  <g font-family="Segoe UI, Inter, Arial, sans-serif">
+    <text x="42" y="52" fill="#7fb7c6" font-size="13" letter-spacing="4">ARCHITECTURE</text>
+    <text x="42" y="84" fill="#e8f6ff" font-size="26" font-weight="700">Ports &amp; Adapters · DDD · SOLID</text>
+    <text x="42" y="112" fill="#7fb7c6" font-size="13">Dependencies always point inward. The domain imports nothing from the outside.</text>
+  </g>
+  <polygon points="500,48 712,170 712,414 500,536 288,414 288,170" fill="none" stroke="#00e5ff" stroke-opacity=".35" stroke-width="2" stroke-dasharray="8 8"/>
+  <polygon points="500,105 673,205 673,379 500,479 327,379 327,205" fill="url(#archApp)" stroke="#00e5ff" stroke-opacity=".75" stroke-width="2"/>
+  <polygon points="500,160 634,247 634,377 500,464 366,377 366,247" fill="url(#archDomain)" stroke="#d500f9" stroke-opacity=".8" stroke-width="2"/>
+  <g font-family="Segoe UI, Inter, Arial, sans-serif" text-anchor="middle">
+    <text x="500" y="230" fill="#00e5ff" font-size="13" letter-spacing="3">APPLICATION</text>
+    <text x="500" y="258" fill="#b8d8e2" font-size="12">Use Cases · Ports · DTOs</text>
+    <text x="500" y="318" fill="#d500f9" font-size="13" letter-spacing="3">DOMAIN CORE</text>
+    <text x="500" y="344" fill="#e8f6ff" font-size="12">Entities · Value Objects</text>
+    <text x="500" y="364" fill="#e8f6ff" font-size="12">Aggregates · Events · Services</text>
+    <text x="500" y="404" fill="#7fb7c6" font-size="11">Pure TypeScript · zero framework imports</text>
+  </g>
+  <g font-family="Segoe UI, Inter, Arial, sans-serif" font-size="12" fill="#b8d8e2" text-anchor="middle">
+    <rect x="392" y="28" width="216" height="30" rx="15" fill="#101c2b" stroke="#00e5ff" stroke-opacity=".35"/>
+    <text x="500" y="48" fill="#00e5ff" font-weight="700">INFRASTRUCTURE ADAPTERS</text>
+    <rect x="54" y="238" width="150" height="28" rx="14" fill="#101c2b" stroke="#00e5ff" stroke-opacity=".25"/>
+    <text x="129" y="257">Three.js render</text>
+    <rect x="54" y="276" width="150" height="28" rx="14" fill="#101c2b" stroke="#00e5ff" stroke-opacity=".25"/>
+    <text x="129" y="295">Cannon-es physics</text>
+    <rect x="54" y="314" width="150" height="28" rx="14" fill="#101c2b" stroke="#00e5ff" stroke-opacity=".25"/>
+    <text x="129" y="333">Web Audio</text>
+    <rect x="796" y="238" width="150" height="28" rx="14" fill="#101c2b" stroke="#00e5ff" stroke-opacity=".25"/>
+    <text x="871" y="257">LocalStorage</text>
+    <rect x="796" y="276" width="150" height="28" rx="14" fill="#101c2b" stroke="#00e5ff" stroke-opacity=".25"/>
+    <text x="871" y="295">Touch / keyboard</text>
+    <rect x="796" y="314" width="150" height="28" rx="14" fill="#101c2b" stroke="#00e5ff" stroke-opacity=".25"/>
+    <text x="871" y="333">Capacitor Android</text>
+  </g>
+  <g stroke="#00e5ff" stroke-opacity=".6" stroke-width="2" marker-end="url(#archArrow)">
+    <path d="M208 252 L320 230"/>
+    <path d="M208 290 L365 290"/>
+    <path d="M208 328 L320 350"/>
+    <path d="M792 252 L680 230"/>
+    <path d="M792 290 L635 290"/>
+    <path d="M792 328 L680 350"/>
+  </g>
+  <g font-family="Segoe UI, Inter, Arial, sans-serif" text-anchor="middle">
+    <text x="500" y="516" fill="#7fb7c6" font-size="12">Driving adapters → use cases → domain core. Driven ports are implemented by infrastructure.</text>
+    <rect x="356" y="522" width="288" height="26" rx="13" fill="#00e5ff" fill-opacity=".08" stroke="#00e5ff" stroke-opacity=".25"/>
+    <text x="500" y="539" fill="#00e5ff" font-size="12" font-weight="700">STRICT INWARD DEPENDENCY RULE</text>
+  </g>
+</svg>

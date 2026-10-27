@@ -3,7 +3,7 @@ import type { Position3D } from '../../../domain/value-objects/Position3D';
 export interface RenderPort {
   initViewport(container: HTMLElement): void;
   render(): void;
-  createEntityMesh(id: string, type: string, position: Position3D): void;
+  createEntityMesh(id: string, type: string, position: Position3D, label?: string): void;
   updateEntityTransform(id: string, position: Position3D, rotationY?: number): void;
   removeEntityMesh(id: string): void;
   updateCameraTarget(targetPosition: Position3D): void;

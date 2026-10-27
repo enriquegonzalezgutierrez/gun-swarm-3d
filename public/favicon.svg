@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">GunSwarm 3D</title>
+  <desc id="logoDesc">Neon swarm icon with a hexagon core, cyan chevrons and violet projectiles.</desc>
+  <defs>
+    <linearGradient id="logoBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#05070a"/>
+    </linearGradient>
+    <linearGradient id="logoAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00e5ff"/>
+      <stop offset="1" stop-color="#80d8ff"/>
+    </linearGradient>
+    <filter id="logoGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="54" fill="url(#logoBg)" stroke="#00e5ff" stroke-opacity=".28" stroke-width="2"/>
+  <circle cx="128" cy="128" r="92" fill="none" stroke="#00e5ff" stroke-opacity=".12" stroke-width="2"/>
+  <polygon points="128,42 202,85 202,171 128,214 54,171 54,85" fill="#0a1220" stroke="#00e5ff" stroke-opacity=".55" stroke-width="3"/>
+  <g filter="url(#logoGlow)">
+    <rect x="72" y="92" width="82" height="18" rx="9" fill="url(#logoAccent)"/>
+    <rect x="72" y="122" width="58" height="18" rx="9" fill="#00b8d4"/>
+    <rect x="72" y="152" width="82" height="18" rx="9" fill="url(#logoAccent)"/>
+    <circle cx="176" cy="101" r="10" fill="#d500f9"/>
+    <circle cx="194" cy="131" r="7" fill="#ff1744"/>
+    <circle cx="176" cy="161" r="6" fill="#d500f9"/>
+    <path d="M194 92 L220 68" stroke="#d500f9" stroke-width="4" stroke-linecap="round"/>
+    <path d="M194 131 L226 131" stroke="#ff1744" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>

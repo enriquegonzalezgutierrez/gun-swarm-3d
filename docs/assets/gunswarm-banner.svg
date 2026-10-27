@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="bannerTitle bannerDesc">
+  <title id="bannerTitle">GunSwarm 3D — crowd runner and auto-shooter</title>
+  <desc id="bannerDesc">Neon banner with the GunSwarm 3D title and a phone showing the swarm, gates and boss.</desc>
+  <defs>
+    <linearGradient id="bannerBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05070a"/>
+      <stop offset=".55" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#101c2b"/>
+    </linearGradient>
+    <linearGradient id="bannerAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00e5ff"/>
+      <stop offset=".55" stop-color="#80d8ff"/>
+      <stop offset="1" stop-color="#d500f9"/>
+    </linearGradient>
+    <linearGradient id="phoneScreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a002c"/>
+      <stop offset=".45" stop-color="#07121d"/>
+      <stop offset="1" stop-color="#05070a"/>
+    </linearGradient>
+    <radialGradient id="bannerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#d500f9" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#d500f9" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="bannerGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#00e5ff" stroke-opacity=".07" stroke-width="1"/>
+    </pattern>
+    <filter id="bannerBlur" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="420" fill="url(#bannerBg)"/>
+  <rect width="1200" height="420" fill="url(#bannerGrid)"/>
+  <circle cx="1020" cy="210" r="220" fill="url(#bannerGlow)" filter="url(#bannerBlur)"/>
+  <path d="M0 370 L470 290" stroke="#00e5ff" stroke-opacity=".09" stroke-width="2"/>
+  <path d="M0 395 L520 335" stroke="#d500f9" stroke-opacity=".08" stroke-width="2"/>
+  <g font-family="Segoe UI, Inter, Arial, sans-serif">
+    <text x="70" y="98" fill="#7fb7c6" font-size="15" letter-spacing="6">PROCEDURAL SWARM COMBAT</text>
+    <text x="68" y="196" fill="#e8f6ff" font-size="82" font-weight="800" letter-spacing="2">GUNSWARM</text>
+    <text x="68" y="278" fill="url(#bannerAccent)" font-size="82" font-weight="800" letter-spacing="2">3D</text>
+    <text x="70" y="326" fill="#b8d8e2" font-size="19">Crowd runner · Auto-shooter · Boss defense</text>
+    <text x="70" y="372" fill="#00e5ff" font-size="13" letter-spacing="3">WEB · ANDROID · DOCKER · 100% PROCEDURAL</text>
+  </g>
+  <g transform="translate(880 35)">
+    <rect x="0" y="0" width="260" height="350" rx="32" fill="#05070a" stroke="#00e5ff" stroke-opacity=".55" stroke-width="2"/>
+    <rect x="10" y="10" width="240" height="330" rx="24" fill="url(#phoneScreen)"/>
+    <rect x="24" y="24" width="66" height="18" rx="9" fill="#0e1b28" stroke="#00e5ff" stroke-opacity=".3"/>
+    <text x="33" y="37" fill="#00e5ff" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="700">SQUAD 12</text>
+    <rect x="98" y="24" width="52" height="18" rx="9" fill="#0e1b28" stroke="#00e5ff" stroke-opacity=".3"/>
+    <text x="110" y="37" fill="#00e5ff" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="700">T3</text>
+    <rect x="158" y="24" width="58" height="18" rx="9" fill="#0e1b28" stroke="#00e5ff" stroke-opacity=".3"/>
+    <text x="168" y="37" fill="#ffd54f" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="700">GOLD 48</text>
+    <path d="M96 320 L164 320 L210 66 L50 66 Z" fill="#101c2b" stroke="#1f3d52" stroke-width="2"/>
+    <path d="M118 320 L142 320 L166 66 L94 66 Z" fill="#0c1722"/>
+    <rect x="62" y="118" width="60" height="48" rx="4" fill="#00e5ff" fill-opacity=".18" stroke="#00e5ff" stroke-width="2"/>
+    <rect x="138" y="118" width="60" height="48" rx="4" fill="#d500f9" fill-opacity=".18" stroke="#d500f9" stroke-width="2"/>
+    <text x="77" y="148" fill="#00e5ff" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="800">+10</text>
+    <text x="153" y="148" fill="#ff4d6d" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="800">÷2</text>
+    <circle cx="130" cy="82" r="24" fill="#311b92" stroke="#d500f9" stroke-width="3"/>
+    <circle cx="130" cy="82" r="34" fill="none" stroke="#d500f9" stroke-opacity=".5" stroke-width="2"/>
+    <g fill="#2f6fde" stroke="#80d8ff" stroke-width="1.5">
+      <circle cx="112" cy="286" r="8"/><circle cx="128" cy="296" r="8"/><circle cx="146" cy="286" r="8"/>
+      <circle cx="120" cy="270" r="8"/><circle cx="140" cy="268" r="8"/>
+    </g>
+    <g stroke="#ffeb3b" stroke-width="2.5" stroke-linecap="round">
+      <path d="M112 278 L122 94"/><path d="M128 288 L128 100"/><path d="M146 278 L138 94"/>
+    </g>
+    <rect x="24" y="318" width="212" height="8" rx="4" fill="#1f3d52"/>
+    <rect x="24" y="318" width="118" height="8" rx="4" fill="#00e5ff"/>
+  </g>
+</svg>

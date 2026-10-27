@@ -1,9 +1,10 @@
-import { Mesh, WebGLRenderer, type Group } from 'three';
+import { WebGLRenderer, type Group, type Mesh } from 'three';
 import type { RenderPort } from '../../application/ports/driven/RenderPort';
 import type { Position3D } from '../../domain/value-objects/Position3D';
 import { MeshFactoryRegistry } from './MeshFactoryRegistry';
 import { ParticleSystemManager } from './ParticleSystemManager';
 import { SceneManager } from './SceneManager';
+import { SceneObjectDisposer } from './SceneObjectDisposer';
 import { TrackMeshFactory } from './TrackMeshFactory';
 
 type RendererFactory = (canvas: HTMLCanvasElement) => WebGLRenderer;
@@ -40,7 +41,7 @@ export class ThreeJsRenderAdapter implements RenderPort {
   public setTrackLength(length: number): void {
     if (this.track !== null) {
       this.sceneManager.scene.remove(this.track);
-      this.disposeMesh(this.track);
+      SceneObjectDisposer.dispose(this.track);
     }
     this.track = TrackMeshFactory.create(length);
     this.sceneManager.scene.add(this.track);
@@ -50,8 +51,13 @@ export class ThreeJsRenderAdapter implements RenderPort {
     this.renderer?.render(this.sceneManager.scene, this.sceneManager.camera);
   }
 
-  public createEntityMesh(id: string, type: string, position: Position3D): void {
-    const mesh = this.registry.create(type);
+  public createEntityMesh(
+    id: string,
+    type: string,
+    position: Position3D,
+    label?: string,
+  ): void {
+    const mesh = this.registry.create(type, label);
     mesh.position.set(position.x, position.y, position.z);
     this.sceneManager.scene.add(mesh);
     this.meshes.set(id, mesh);
@@ -78,7 +84,7 @@ export class ThreeJsRenderAdapter implements RenderPort {
       return;
     }
     this.sceneManager.scene.remove(mesh);
-    this.disposeMesh(mesh);
+    SceneObjectDisposer.dispose(mesh);
     this.meshes.delete(id);
   }
 
@@ -100,26 +106,11 @@ export class ThreeJsRenderAdapter implements RenderPort {
     }
     if (this.track !== null) {
       this.sceneManager.scene.remove(this.track);
-      this.disposeMesh(this.track);
+      SceneObjectDisposer.dispose(this.track);
       this.track = null;
     }
     this.particles.dispose();
     this.renderer?.dispose();
     this.renderer = null;
-  }
-
-  private disposeMesh(mesh: Group | Mesh): void {
-    mesh.traverse((object) => {
-      if (!(object instanceof Mesh)) {
-        return;
-      }
-      object.geometry.dispose();
-      const materials = Array.isArray(object.material) ? object.material : [object.material];
-      for (const material of materials) {
-        const texture = (material as unknown as { map?: { dispose: () => void } }).map;
-        texture?.dispose();
-        material.dispose();
-      }
-    });
   }
 }

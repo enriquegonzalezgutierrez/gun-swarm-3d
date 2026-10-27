@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { Damage } from '@domain/value-objects/Damage';
 import { Position3D } from '@domain/value-objects/Position3D';
+import { Trooper } from '@domain/entities/Trooper';
 import { createWorldRunnerHarness } from '../../../fixtures/WorldRunnerHarness';
 
 describe('WorldRunner', () => {
@@ -33,6 +34,23 @@ describe('WorldRunner', () => {
     expect(content.obstacles.has(first.id)).toBe(false);
     expect(runner.destroyedObstacles).toBe(1);
     expect(contentView.retain).toHaveBeenCalled();
+  });
+
+  it('keeps troopers in formation behind the leader', () => {
+    const { runner, squad } = createWorldRunnerHarness();
+    squad.addTrooper(new Trooper('trooper-1', Position3D.zero()));
+    squad.addTrooper(new Trooper('trooper-2', new Position3D(1, 0, 0)));
+
+    for (let frame = 0; frame < 20; frame += 1) {
+      runner.update(0.1, true);
+    }
+
+    const leader = squad.leaderPosition;
+    for (const trooper of squad.activeTroopers) {
+      expect(trooper.position.z).toBeGreaterThan(5);
+      expect(trooper.position.z).toBeLessThan(leader.z);
+      expect(Math.abs(trooper.position.x - leader.x)).toBeLessThan(4.5);
+    }
   });
 
   it('moves the boss during the arena phase', () => {

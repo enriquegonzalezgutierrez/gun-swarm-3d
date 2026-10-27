@@ -28,7 +28,7 @@ import { WeaponUpgradeChestMeshFactory } from './factories/WeaponUpgradeChestMes
 import { WoodCrateMeshFactory } from './factories/WoodCrateMeshFactory';
 
 export class MeshFactoryRegistry {
-  public create(type: string): Group | Mesh {
+  public create(type: string, label?: string): Group | Mesh {
     switch (type) {
       case 'SquadLeader':
         return new SquadLeaderMeshFactory().createMesh();
@@ -65,9 +65,9 @@ export class MeshFactoryRegistry {
       case 'ConveyorTile':
         return new ConveyorTileMeshFactory().createMesh();
       case 'MathGatePositive':
-        return new MathGateMeshFactory(true).createMesh();
+        return new MathGateMeshFactory(true, label).createMesh();
       case 'MathGateNegative':
-        return new MathGateMeshFactory(false).createMesh();
+        return new MathGateMeshFactory(false, label).createMesh();
       case 'WeaponUpgradeChest':
         return new WeaponUpgradeChestMeshFactory().createMesh();
       case 'ShieldOrb':

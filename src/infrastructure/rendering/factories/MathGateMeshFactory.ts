@@ -10,7 +10,10 @@ import { MeshAssembly } from '../MeshAssembly';
 import type { EntityMeshFactory } from './EntityMeshFactory';
 
 export class MathGateMeshFactory implements EntityMeshFactory {
-  public constructor(private readonly positive = true) {}
+  public constructor(
+    private readonly positive = true,
+    private readonly label?: string,
+  ) {}
 
   public createMesh(): Group {
     const assembly = new MeshAssembly();
@@ -24,7 +27,10 @@ export class MathGateMeshFactory implements EntityMeshFactory {
     material.opacity = 0.28;
     material.emissive.setHex(color);
     material.emissiveIntensity = 0.65;
-    const text = this.createTextMesh(this.positive ? '+' : '−', this.positive ? '#00e5ff' : '#ff1744');
+    const text = this.createTextMesh(
+      this.label ?? (this.positive ? '+' : '−'),
+      this.positive ? '#00e5ff' : '#ff1744',
+    );
     if (text !== null) {
       text.position.set(0, 1.9, 0.08);
       assembly.add(text);
@@ -45,7 +51,7 @@ export class MathGateMeshFactory implements EntityMeshFactory {
     }
     context.clearRect(0, 0, 256, 256);
     context.fillStyle = color;
-    context.font = 'bold 180px sans-serif';
+    context.font = `bold ${label.length > 2 ? 120 : 180}px sans-serif`;
     context.textAlign = 'center';
     context.textBaseline = 'middle';
     context.fillText(label, 128, 128);
